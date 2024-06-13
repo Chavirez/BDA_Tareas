@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.jpa_249522;
+package Pruebas;
+
+import Persistencia.AlumnoDAO;
 
 /**
  *
