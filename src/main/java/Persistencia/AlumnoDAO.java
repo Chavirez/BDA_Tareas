@@ -159,6 +159,54 @@ public void guardarConRelacionCurso(){
         
     managerFactory.close();
 }    
+
+    public void leer(){
     
-}    
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("conexionJPA");
+ 
+        EntityManager entityManager = managerFactory.createEntityManager();
+        
+        String jpql = "Select a from AlumnoEntidad A";
+        
+        Query query = entityManager.createQuery(jpql);
+        
+        List<AlumnoEntidad> alumnos =  (List<AlumnoEntidad>) query.getResultList();
+        
+        for (AlumnoEntidad alumno : alumnos) {
+            System.out.println(alumno);
+        }
+
+        System.out.println("Operación terminada correctamente");
+
+        entityManager.close();
+        managerFactory.close();        
+        
+    }
+    
+    public void leerPorID(long id){
+    
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("conexionJPA");
+ 
+        EntityManager entityManager = managerFactory.createEntityManager();
+        
+        String jpql = "Select A from AlumnoEntidad A WHERE A.id= :alumno";
+        
+        Query query = entityManager.createQuery(jpql);
+        
+        query.setParameter("alumno", id);
+        
+        List<AlumnoEntidad> alumnos =  (List<AlumnoEntidad>) query.getResultList();
+        
+        for (AlumnoEntidad alumno : alumnos) {
+            System.out.println(alumno);
+        }
+
+        System.out.println("Operación terminada correctamente");
+
+        entityManager.close();
+        managerFactory.close();        
+        
+    }
+    
+   }    
 
