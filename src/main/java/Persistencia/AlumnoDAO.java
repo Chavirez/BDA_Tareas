@@ -12,6 +12,10 @@ import Entidades.DireccionEntidad;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -207,6 +211,70 @@ public void guardarConRelacionCurso(){
         managerFactory.close();        
         
     }
+    
+    public void leerCriteriaTodos() {
+        // Paso 1: Crear una fábrica de administradores de entidades con la configuración "ConexionJPA"
+        // La fábrica de administradores de entidades (EntityManagerFactory) es responsable de crear instancias de EntityManager.
+        // La configuración "ConexionJPA" se refiere a los detalles de conexión definidos en el archivo de configuración (persistence.xml).
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("conexionJPA");
+
+        // Paso 2: Crear un administrador de entidades (EntityManager) a partir de la fábrica
+        // El EntityManager es la interfaz principal que se utiliza para interactuar con el contexto de persistencia.
+        EntityManager entityManager = managerFactory.createEntityManager();
+
+        // Paso 3: Crear un CriteriaBuilder desde el EntityManager
+        // El CriteriaBuilder es utilizado para construir consultas de Criteria API, 
+        // que es una manera programática y segura de tipo para construir consultas.
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        // Paso 4: Crear un CriteriaQuery para la entidad AlumnoEntidad
+        // El CriteriaQuery define el tipo de resultado que se espera de la consulta, en este caso, una entidad de tipo AlumnoEntidad.
+        CriteriaQuery<AlumnoEntidad> criteriaQuery = criteriaBuilder.createQuery(AlumnoEntidad.class);
+
+        // Paso 5: Ejecutar la consulta y obtener el resultado
+        // El método createQuery ejecuta la consulta construida y devuelve el resultado, en este caso List<AlumnoEntidad>.
+        List<AlumnoEntidad> alumnos = entityManager.createQuery(criteriaQuery).getResultList();
+
+        for (AlumnoEntidad alumno : alumnos) {
+            System.out.println(alumno);
+        }
+
+        // Mostrar un mensaje de éxito indicando que la operación se completó correctamente
+        System.out.println("Operación terminada correctamente");
+
+        // Paso 6: Cerrar el administrador de entidades y la fábrica
+        // Es importante cerrar el EntityManager y la EntityManagerFactory para liberar los recursos utilizados.
+        entityManager.close();
+        managerFactory.close();
+    }
+    
+    public void leerCriteriaPorId(long id) {
+        EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("conexionJPA");
+
+        EntityManager entityManager = managerFactory.createEntityManager();
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<AlumnoEntidad> criteriaQuery = criteriaBuilder.createQuery(AlumnoEntidad.class);
+
+        Root<AlumnoEntidad> root = criteriaQuery.from(AlumnoEntidad.class);
+
+        
+        Predicate predicado = criteriaBuilder.equal(root.get("id"), id);
+        
+        criteriaQuery.where(predicado);
+        
+        List<AlumnoEntidad> alumnos = entityManager.createQuery(criteriaQuery).getResultList();
+
+        for (AlumnoEntidad alumno : alumnos) {
+            System.out.println(alumno);
+        }
+
+        System.out.println("Operación terminada correctamente");
+
+        entityManager.close();
+        managerFactory.close();
+    }    
     
    }    
 

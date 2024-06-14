@@ -15,7 +15,7 @@ public class JPA_249522 {
     public static void main(String[] args) {
         
         AlumnoDAO a = new AlumnoDAO();
-        a.leerPorID(2);
-        System.out.println("Hello World!");
+        a.leerCriteriaPorId(1);
+      
     }
 }
