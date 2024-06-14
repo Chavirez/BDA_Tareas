@@ -1,7 +1,8 @@
-com\mycompany\jpa_249522\JPA_249522.class
-com\mycompany\jpa_249522\AlumnoDAO.class
+DTOs\AlumnoDTO.class
 Entidades\AlumnoCursoEntidad.class
 Entidades\CursoEntidad.class
 Entidades\CarreraEntidad.class
+Pruebas\JPA_249522.class
 Entidades\DireccionEntidad.class
 Entidades\AlumnoEntidad.class
+Persistencia\AlumnoDAO.class

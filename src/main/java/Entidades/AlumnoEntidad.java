@@ -105,11 +105,10 @@ public class AlumnoEntidad implements Serializable {
     public void setCursos(List<AlumnoCursoEntidad> cursos) {
         this.cursos = cursos;
     }
-    
-    
 
-    
-
-    
+    @Override
+    public String toString() {
+        return "AlumnoEntidad{" + "id=" + id + ", nombres=" + nombres + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", direcciones=" + direcciones + ", cursos=" + cursos + ", carrera=" + carrera + '}';
+    }    
     
 }
